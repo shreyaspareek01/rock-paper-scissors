@@ -39,9 +39,7 @@ function playRound(playerSelection, computerSelection) {
     return "You won! ROCK beats SCISSORS";
   } else {
     alert("invalid input, try again");
-    getComputerChoice();
-    playerSelection = prompt("Enter your move:").toUpperCase();
-    playRound(playerSelection, computerSelection);
+    return "invalid input!";
   }
 }
 
