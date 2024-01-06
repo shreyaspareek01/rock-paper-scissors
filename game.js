@@ -17,8 +17,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (computerSelection == playerSelection) {
-    alert("It's a tie! try again.");
-    return "It's a tie!";
+    return "It's a tie!, try again";
   } else if (computerSelection == "ROCK" && playerSelection == "PAPER") {
     playerScore++;
     return "You won! PAPER beats ROCK";
@@ -38,25 +37,61 @@ function playRound(playerSelection, computerSelection) {
     playerScore++;
     return "You won! ROCK beats SCISSORS";
   } else {
-    alert("invalid input, try again");
-    return "invalid input!";
+    alert("invalid input");
+    return "invalid input, try again";
   }
 }
 
-while (playerScore < 5 && computerScore < 5) {
-  getComputerChoice();
-  playerSelection = prompt("Enter your move:").toUpperCase();
-  alert(
-    playRound(playerSelection, computerSelection) +
-      "\nYour Score: " +
+function updateResult(result) {
+  if (playerScore < 5 && computerScore < 5) {
+    output.style["background-color"] = "rgb(18, 18, 18)";
+    output.style["height"] = "20vh";
+    output.style["width"] = "80%";
+    output.style["margin-left"] = "7.5%";
+    output.style["color"] = "rgb(240, 240, 70)";
+    output.style["padding"] = "1em";
+    output.innerHTML =
+      result +
+      "<br>" +
+      "Your score: " +
       playerScore +
-      "\nComputer's score: " +
-      computerScore
-  );
+      "<br>" +
+      "Computer score: " +
+      computerScore;
+  } else if (
+    playerScore == 5 &&
+    output.innerHTML != "You lost the game, Better luck next time"
+  ) {
+    output.innerHTML = "Congratulations! You won the game";
+  } else if (
+    computerScore == 5 &&
+    output.innerHTML != "Congratulations! You won the game"
+  ) {
+    output.innerHTML = "You lost the game, Better luck next time";
+  }
 }
 
-if (computerScore > playerScore) {
-  alert("You lost the game! Better luck next time.");
-} else if (computerScore < playerScore) {
-  alert("Congratulations! You won the game");
-}
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const output = document.querySelector(".result");
+rock.addEventListener("click", () => {
+  playerSelection = "ROCK";
+  getComputerChoice();
+  let result = playRound(playerSelection, computerSelection);
+  updateResult(result);
+});
+
+paper.addEventListener("click", () => {
+  playerSelection = "PAPER";
+  getComputerChoice();
+  let result = playRound(playerSelection, computerSelection);
+  updateResult(result);
+});
+
+scissors.addEventListener("click", () => {
+  playerSelection = "SCISSORS";
+  getComputerChoice();
+  let result = playRound(playerSelection, computerSelection);
+  updateResult(result);
+});
