@@ -33,6 +33,7 @@ p {
 .choice div {
   width: 30%;
   height: 80%;
+  cursor: pointer;
 }
 img {
   width: 100%;
